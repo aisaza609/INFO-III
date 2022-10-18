@@ -204,6 +204,13 @@ public class FrBuscarVehiculo extends javax.swing.JFrame {
 
     private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
         // TODO add your handling code here:
+        DefaultTableModel modelo3 = (DefaultTableModel) jTableVehiculos.getModel();  
+        Object[] limpiar = new Object[5];
+        for(int i=0;i<jTableVehiculos.getRowCount();i++){
+        modelo3.removeRow(i);
+         i-=1;
+             
+        }
     }//GEN-LAST:event_jButtonLimpiarActionPerformed
 
     /**
