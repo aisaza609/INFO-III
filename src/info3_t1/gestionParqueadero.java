@@ -40,25 +40,52 @@ public class gestionParqueadero {
       }
       
  
-    public static Carro carroBuscar(String placa, String cilindraje){
-         Carro unCarro=null;
-        for (int i=0;i<listaCarros.size();i++){
-            if ((listaCarros.get(i).getPlaca().equals(placa)) || (listaCarros.get(i).equals(cilindraje))){
-               unCarro=listaCarros.get(i);
-               break;
+ 
+     public static Vehiculo VehiculoBuscar(String placa, String cilindraje){
+         Vehiculo unVehiculo=null;
+        for (int i=0;i<listaVehiculos.size();i++){
+            if (listaVehiculos.get(i).equals(cilindraje) || listaVehiculos.get(i).getPlaca().equals(placa)){
+                unVehiculo=listaVehiculos.get(i);
+                break;
+            } else {
             }
         }
-        return unCarro; 
+        return unVehiculo; 
       }
-      
-    public static Moto motoBuscar(String placa, String cilindraje){
-         Moto unaMoto=null;
-        for (int i=0;i<listaMotos.size();i++){
-            if ((listaMotos.get(i).getPlaca().equals(placa)) || (listaMotos.get(i).equals(cilindraje))){
-               unaMoto=listaMotos.get(i);
-               break;
+     
+     public static Vehiculo VehiculoBuscarPlaca(String placa){
+         Vehiculo unVehiculo=null;
+        for (int i=0;i<listaVehiculos.size();i++){
+            if ( listaVehiculos.get(i).getPlaca().equals(placa)){
+                unVehiculo=listaVehiculos.get(i);
+                break;
+            } else {
             }
         }
-        return unaMoto; 
+        return unVehiculo; 
       }
+     
+       public static Vehiculo VehiculoBuscarCilindraje(String Cilindraje){
+         Vehiculo unVehiculo=null;
+        for (int i=0;i<listaVehiculos.size();i++){
+            if ( listaVehiculos.get(i).getCilindraje().equals(Cilindraje)){
+                unVehiculo=listaVehiculos.get(i);
+                break;
+            } 
+            
+        }
+        return unVehiculo; 
+      }
+     
+       public static boolean modificarVehiculo(Vehiculo unVehiculo){
+          
+           boolean encontrado=false;
+           for(int cont=0; cont<listaVehiculos.size();cont++){
+               if(listaVehiculos.get(cont).getPlaca().equals(unVehiculo.getPlaca())){
+                   encontrado=true;
+                   listaVehiculos.get(cont).setColor(unVehiculo.getColor());
+               }
+           }
+           return encontrado;
+       }
 }

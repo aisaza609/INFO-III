@@ -5,6 +5,8 @@
  */
 package info3_t1;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
@@ -29,10 +31,22 @@ public class FrParqueadero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jButtonAgregarVehiculo = new javax.swing.JButton();
         jButtonBuscarVehiculo = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButtonAtras = new javax.swing.JButton();
+        jActualizar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtNombre = new javax.swing.JTextPane();
+        jLabel1 = new javax.swing.JLabel();
+        jButtonOK = new javax.swing.JButton();
+
+        jMenu1.setText("jMenu1");
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -57,10 +71,21 @@ public class FrParqueadero extends javax.swing.JFrame {
             }
         });
 
-        jButtonAtras.setText("ATRAS");
-        jButtonAtras.addActionListener(new java.awt.event.ActionListener() {
+        jActualizar.setText("ACTUALIZAR");
+        jActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAtrasActionPerformed(evt);
+                jActualizarActionPerformed(evt);
+            }
+        });
+
+        jScrollPane1.setViewportView(txtNombre);
+
+        jLabel1.setText("NOMBRE DEL PARQUEADERO");
+
+        jButtonOK.setText("OK");
+        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOKActionPerformed(evt);
             }
         });
 
@@ -69,28 +94,50 @@ public class FrParqueadero extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonAgregarVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonBuscarVehiculo, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)
-                    .addComponent(jButtonAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(93, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonOK))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(126, 126, 126)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jButtonBuscarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonAgregarVehiculo, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(127, 127, 127)
+                                .addComponent(jLabel1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(139, 139, 139)
+                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 128, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonAgregarVehiculo)
-                    .addComponent(jButtonBuscarVehiculo))
-                .addGap(42, 42, 42)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton4)
-                    .addComponent(jButtonAtras))
-                .addContainerGap(124, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                        .addComponent(jButtonBuscarVehiculo))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonOK)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonAgregarVehiculo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jActualizar)
+                .addGap(43, 43, 43)
+                .addComponent(jButton4)
+                .addGap(27, 27, 27))
         );
 
         pack();
@@ -100,23 +147,34 @@ public class FrParqueadero extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrAgregarVehiculo frm = new FrAgregarVehiculo();
         frm.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonAgregarVehiculoActionPerformed
 
     private void jButtonBuscarVehiculoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarVehiculoActionPerformed
         // TODO add your handling code here:
         FrBuscarVehiculo frm = new FrBuscarVehiculo();
         frm.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonBuscarVehiculoActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+int confirmado = JOptionPane.showConfirmDialog(null, "Está seguro de Salir");
+     if (JOptionPane.OK_OPTION==confirmado){
+         System.exit(0);      
+     }// TODO add your handling code here:
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButtonAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAtrasActionPerformed
+    private void jActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jActualizarActionPerformed
         // TODO add your handling code here:
-        FrPrincipal frm = new FrPrincipal();
+         FrActualizarDatos frm = new FrActualizarDatos();
         frm.setVisible(true);
-    }//GEN-LAST:event_jButtonAtrasActionPerformed
+        dispose();
+    }//GEN-LAST:event_jActualizarActionPerformed
+
+    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
+        
+          
+    }//GEN-LAST:event_jButtonOKActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,9 +212,16 @@ public class FrParqueadero extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jActualizar;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButtonAgregarVehiculo;
-    private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonBuscarVehiculo;
+    private javax.swing.JButton jButtonOK;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextPane txtNombre;
     // End of variables declaration//GEN-END:variables
 }

@@ -43,6 +43,7 @@ public class FrAgregarMoto extends javax.swing.JFrame {
         jTextFieldPlaca = new javax.swing.JTextField();
         jButtonAgregarMoto = new javax.swing.JButton();
         jButtonAtras = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,6 +86,13 @@ public class FrAgregarMoto extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Menu");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -111,7 +119,9 @@ public class FrAgregarMoto extends javax.swing.JFrame {
                         .addComponent(jButtonAgregarMoto)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonAtras)))
-                .addContainerGap(135, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,7 +147,8 @@ public class FrAgregarMoto extends javax.swing.JFrame {
                 .addGap(29, 29, 29)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAgregarMoto)
-                    .addComponent(jButtonAtras))
+                    .addComponent(jButtonAtras)
+                    .addComponent(jButton1))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
 
@@ -185,7 +196,15 @@ public class FrAgregarMoto extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrAgregarVehiculo frm = new FrAgregarVehiculo();
         frm.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonAtrasActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        FrParqueadero frm = new FrParqueadero();
+        frm.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -224,6 +243,7 @@ public class FrAgregarMoto extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAgregarMoto;
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JComboBox<String> jComboBoxTipoCaja;

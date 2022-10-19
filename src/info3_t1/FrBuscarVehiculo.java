@@ -5,6 +5,9 @@
  */
 package info3_t1;
 
+import static info3_t1.gestionParqueadero.listaVehiculos;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,20 +36,18 @@ public class FrBuscarVehiculo extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBoxTV = new javax.swing.JComboBox<>();
-        txtPlaca = new javax.swing.JTextField();
-        txtCilindraje = new javax.swing.JTextField();
+        txtBusqueda = new javax.swing.JTextField();
         jButtonBuscar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableVehiculos = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jButtonAtras = new javax.swing.JButton();
-        jButtonLimpiar = new javax.swing.JButton();
+        jButtonMenuP = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jComboBoxTV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "moto", "carro", "todos" }));
+        jComboBoxTV.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "", "placa", "cilindraje", "todos" }));
 
         jButtonBuscar.setText("BUSCAR");
         jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
@@ -60,16 +61,20 @@ public class FrBuscarVehiculo extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cantidad", "Placa", "Color", "Cilindraje", "Npuertas/Tcaja"
+                "Placa", "Color", "Cilindraje"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTableVehiculos);
 
-        jLabel1.setText("Placa del Vehiculo");
-
-        jLabel2.setText("Cilindraje del Vehiculo");
-
-        jLabel3.setText("¿Que vas a buscar?");
+        jLabel3.setText("Vas a bucar por:");
 
         jButtonAtras.setText("Atras");
         jButtonAtras.addActionListener(new java.awt.event.ActionListener() {
@@ -78,10 +83,17 @@ public class FrBuscarVehiculo extends javax.swing.JFrame {
             }
         });
 
-        jButtonLimpiar.setText("LIMPIAR");
-        jButtonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        jButtonMenuP.setText("menu p");
+        jButtonMenuP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonLimpiarActionPerformed(evt);
+                jButtonMenuPActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Salir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -90,49 +102,42 @@ public class FrBuscarVehiculo extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonLimpiar)))
-                .addGap(37, 37, 37)
+                        .addComponent(jButton1)
+                        .addGap(20, 20, 20)
+                        .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jComboBoxTV, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtPlaca)
-                        .addComponent(txtCilindraje, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jButtonAtras, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(117, Short.MAX_VALUE))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(9, 9, 9)
+                        .addComponent(jButtonMenuP)
+                        .addGap(22, 22, 22)
+                        .addComponent(jButtonBuscar)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBoxTV, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(43, 43, 43))))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBoxTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(69, 69, 69)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPlaca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCilindraje, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonBuscar)
-                .addGap(18, 18, 18)
+                    .addComponent(txtBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBoxTV, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonAtras)
-                    .addComponent(jButtonLimpiar))
+                    .addComponent(jButtonBuscar)
+                    .addComponent(jButtonMenuP)
+                    .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -142,52 +147,96 @@ public class FrBuscarVehiculo extends javax.swing.JFrame {
 
     private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
         // TODO add your handling code here:
+          DefaultTableModel modelo = (DefaultTableModel) jTableVehiculos.getModel(); 
+                    Object[] datos = new Object[5];
         String op= jComboBoxTV.getSelectedItem().toString();
         switch(op){
+            //ESCOGE LAS OPCIONES DEL INTEM
+            case "placa":
+                  for(int i=0;i<jTableVehiculos.getRowCount();i++){
+                modelo.removeRow(i);
+                 i-=1;
+             
+                 }
+                if (!txtBusqueda.getText().isEmpty()){ //SI EL TEXTO NO ESTA VACIO 
+            try{
+  
+                Vehiculo unVehiculo = gestionParqueadero.VehiculoBuscarPlaca(txtBusqueda.getText().trim());
+                if(unVehiculo!=null){
+                  
+                    datos[0]=unVehiculo.getPlaca();
+                    datos[1]=unVehiculo.getColor();
+                    datos[2]=unVehiculo.getCilindraje();
+                    datos[3]="";
+                    
+                     modelo.addRow(datos); 
+                    
+                }else{
+                    JOptionPane.showMessageDialog(null, "No existe Vehiculo con esa placa");
+                }
+            }catch(NumberFormatException | HeadlessException ex){
+                JOptionPane.showMessageDialog(null, "Debe ingresar un número válido");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe Ingresar la Placa del carro a consultar");
+        }
+        
+                break;
+        case "cilindraje" : 
+             for(int i=0;i<jTableVehiculos.getRowCount();i++){
+                modelo.removeRow(i);
+                 i-=1;
+             
+                 }
+           
+            Vehiculo unVehiculo=null;
             
-            case "todos": 
-            int cantidadVehiculos = gestionParqueadero.listaVehiculos.size();
-        DefaultTableModel modelo = (DefaultTableModel) jTableVehiculos.getModel();        
-        Object[] datos = new Object[4];
-        for(int i=0;i<cantidadVehiculos;i++){
-            datos[0]=gestionParqueadero.listaVehiculos.get(i).getPlaca();
+            if (!txtBusqueda.getText().isEmpty()){ //SI EL TEXTO NO ESTA VACIO 
+            try{
+                 String Cilindraje = txtBusqueda.getText();
+                  for (int i=0;i<listaVehiculos.size();i++){
+                   if ( listaVehiculos.get(i).getCilindraje().equals(Cilindraje)){
+                      unVehiculo=listaVehiculos.get(i);
+     
+                    datos[0]=unVehiculo.getPlaca();
+                    datos[1]=unVehiculo.getColor();
+                    datos[2]=unVehiculo.getCilindraje();
+                    datos[3]="";
+                     modelo.addRow(datos);
+                
+                  
+                
+                  } 
+                   /*else{
+                    JOptionPane.showMessageDialog(null, "No existe Vehiculo con ese cilindraje");
+                }   */
+                   
+                  }
+                    
+                
+            }catch(NumberFormatException | HeadlessException ex){
+                JOptionPane.showMessageDialog(null, "Debe ingresar un número válido");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe Ingresar el cilindraje  del vehiculo a consultar");
+        }
+   
+        break;
+        
+          case "todos" : 
+                for(int i=0;i<jTableVehiculos.getRowCount();i++){
+                modelo.removeRow(i);
+                 i-=1;
+             
+                 }
+            
+        int cantidadCarros = gestionParqueadero.listaVehiculos.size();
+        
+        for(int i=0;i<cantidadCarros;i++){
+          datos[0]=gestionParqueadero.listaVehiculos.get(i).getPlaca();
             datos[1]=gestionParqueadero.listaVehiculos.get(i).getColor();
             datos[2]=gestionParqueadero.listaVehiculos.get(i).getCilindraje();
-            datos[3]="";
-            modelo.addRow(datos); 
-                
-            }
-        break;
-        
-        case "moto" : 
-            
-        int cantidadMotos = gestionParqueadero.listaMotos.size();
-        DefaultTableModel modelo1 = (DefaultTableModel) jTableVehiculos.getModel();  
-        
-        Object[] datos1 = new Object[5];
-       
-          
-        for(int i=0;i<cantidadMotos;i++){
-            datos1[1]=gestionParqueadero.listaMotos.get(i).getPlaca();
-            datos1[2]=gestionParqueadero.listaMotos.get(i).getColor();
-            datos1[3]=gestionParqueadero.listaMotos.get(i).getCilindraje();
-            datos1[4]=gestionParqueadero.listaMotos.get(i).getTcaja();
-            modelo1.addRow(datos1);  
-            
-        }
-        break;
-        
-          case "carro" : 
-            
-        int cantidadCarros = gestionParqueadero.listaCarros.size();
-        DefaultTableModel modelo2 = (DefaultTableModel) jTableVehiculos.getModel();  
-        Object[] datos2 = new Object[5];
-        for(int i=0;i<cantidadCarros;i++){
-          datos2[1]=gestionParqueadero.listaCarros.get(i).getPlaca();
-            datos2[2]=gestionParqueadero.listaCarros.get(i).getColor();
-            datos2[3]=gestionParqueadero.listaCarros.get(i).getCilindraje();
-            datos2[4]=gestionParqueadero.listaCarros.get(i).getNpuertas();
-            modelo2.addRow(datos2);
+            modelo.addRow(datos);
              
         }
         break;
@@ -200,18 +249,23 @@ public class FrBuscarVehiculo extends javax.swing.JFrame {
         // TODO add your handling code here:
         FrParqueadero frm = new FrParqueadero();
         frm.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButtonAtrasActionPerformed
 
-    private void jButtonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLimpiarActionPerformed
+    private void jButtonMenuPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMenuPActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel modelo3 = (DefaultTableModel) jTableVehiculos.getModel();  
-        Object[] limpiar = new Object[5];
-        for(int i=0;i<jTableVehiculos.getRowCount();i++){
-        modelo3.removeRow(i);
-         i-=1;
-             
-        }
-    }//GEN-LAST:event_jButtonLimpiarActionPerformed
+        FrParqueadero frm = new FrParqueadero();
+        frm.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_jButtonMenuPActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int confirmado = JOptionPane.showConfirmDialog(null, "Está seguro de Salir");
+     if (JOptionPane.OK_OPTION==confirmado){
+         System.exit(0);
+     }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -249,16 +303,14 @@ public class FrBuscarVehiculo extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonBuscar;
-    private javax.swing.JButton jButtonLimpiar;
+    private javax.swing.JButton jButtonMenuP;
     private javax.swing.JComboBox<String> jComboBoxTV;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableVehiculos;
-    private javax.swing.JTextField txtCilindraje;
-    private javax.swing.JTextField txtPlaca;
+    private javax.swing.JTextField txtBusqueda;
     // End of variables declaration//GEN-END:variables
 }
