@@ -172,7 +172,7 @@ int confirmado = JOptionPane.showConfirmDialog(null, "Está seguro de Salir");
     }//GEN-LAST:event_jActualizarActionPerformed
 
     private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
-        
+        txtNombre.getText();
           
     }//GEN-LAST:event_jButtonOKActionPerformed
 
